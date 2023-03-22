@@ -1,6 +1,7 @@
 package dao
 
 import (
+	"errors"
 	"ginFlutterBolg/model"
 	"ginFlutterBolg/util"
 )
@@ -15,7 +16,7 @@ func (u *UserDao) Insert(user *model.User) error {
 	_, err := orm.InsertOne(user)
 
 	if err != nil {
-		return err
+		return errors.New("数据库注册失败")
 	}
 	return nil
 }

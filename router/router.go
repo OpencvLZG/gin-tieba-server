@@ -20,6 +20,7 @@ func InitRouter(gin *gin.Engine) {
 
 	viewGroup := gin.Group("/view")
 	viewGroup.GET("list", articleController.GetArticleList)
+	viewGroup.GET("search", articleController.SearchArticleById)
 
 	articleGroup := gin.Group("/article")
 	articleGroup.Use(LoginMiddleWare)

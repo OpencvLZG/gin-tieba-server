@@ -63,10 +63,10 @@ func (u *UserService) Register(registerUser *RegisterUser) error {
 
 	userdao := new(dao.UserDao)
 	user := new(model.User)
-
+	user.UserId = util.GenerateUID()
 	user.Username = registerUser.Username
 	user.Password = util.MD5(registerUser.Password)
-
+	user.Secret = util.GenerateKey()
 	user.Email = registerUser.Email
 	user.CreateTime = now
 	user.UpdateTime = now

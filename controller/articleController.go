@@ -32,10 +32,7 @@ func (a *ArticleController) CreateArticle(c *gin.Context) {
 		ResponseStatusOk(c, 400, "数据同步错误", err.Error())
 		return
 	}
-
-	print(articleRequest)
 	user, err := userController.GetUserInfo(c)
-	print(user)
 	if err != nil {
 		ResponseStatusOk(c, 400, "用户登录失败", err.Error())
 		return
@@ -56,4 +53,20 @@ func (a *ArticleController) CreateArticle(c *gin.Context) {
 		return
 	}
 	ResponseStatusOk(c, 200, "创建成功", "")
+}
+
+func (a *ArticleController) SearchArticleById(c *gin.Context) {
+	article := new(model.Article)
+	if err := c.Bind(&article); err != nil {
+		ResponseStatusOk(c, 400, "数据绑定错误", err.Error())
+		return
+	}
+	articleService := new(service.ArticleService)
+	err := articleService.SearchByArticleId(article)
+	print(err)
+	if err != nil {
+		ResponseStatusOk(c, 410, "搜索失败", err.Error())
+		return
+	}
+	ResponseStatusOk(c, 200, "搜索成功", article)
 }

@@ -29,10 +29,16 @@ func (a *ArticleService) ArticleList() (*[]model.Article, error) {
 
 func (a *ArticleService) InsertArticle(article *model.Article) error {
 	articleDao := new(dao.ArticleDao)
-	err := articleDao.InsertArticle(article)
-	if err != nil {
+	if err := articleDao.InsertArticle(article); err != nil {
 
 	}
 	return nil
+}
 
+func (a *ArticleService) SearchByArticleId(article *model.Article) error {
+	articleDao := new(dao.ArticleDao)
+	if err := articleDao.GetArticleById(article); err != nil {
+		return err
+	}
+	return nil
 }
