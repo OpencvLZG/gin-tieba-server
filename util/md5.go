@@ -38,3 +38,18 @@ func GenerateUID() int64 {
 	uid, _ := strconv.ParseInt(uidBuilder, 10, 64)
 	return uid
 }
+
+func GenerateID() int64 {
+	// 确定字符集和长度
+	rand.Seed(time.Now().UnixNano())
+	const uidLen = 8
+	const charset = "0123456789"
+
+	// 生成随机字符串并使用 strconv 包将其转换为 int64
+	var uidBuilder string
+	for i := 0; i < uidLen; i++ {
+		uidBuilder += string(charset[rand.Intn(len(charset))])
+	}
+	uid, _ := strconv.ParseInt(uidBuilder, 10, 64)
+	return uid
+}

@@ -16,12 +16,12 @@ func (a *ArticleDao) GetArticleLimit() (*[]model.Article, error) {
 	articleList := make([]model.Article, 0)
 	err := orm.Limit(10).OrderBy("create_time").Find(&articleList)
 	if err != nil {
-
+		return &articleList, errors.New("搜索文章列表错误，数据库搜索错误")
 	}
 	return &articleList, err
 
 }
-func (a *ArticleDao) GetArticleById(article *model.Article) error {
+func (a *ArticleDao) GetArticle(article *model.Article) error {
 	orm := util.Orm
 	res, err := orm.Get(article)
 	if err != nil {
@@ -38,5 +38,8 @@ func (a *ArticleDao) GetArticleById(article *model.Article) error {
 func (a *ArticleDao) InsertArticle(article *model.Article) error {
 	orm := util.Orm
 	_, err := orm.InsertOne(article)
+	if err != nil {
+		return errors.New("插入文章错误,数据库插入文章错误")
+	}
 	return err
 }

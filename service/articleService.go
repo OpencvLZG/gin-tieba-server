@@ -37,7 +37,7 @@ func (a *ArticleService) InsertArticle(article *model.Article) error {
 
 func (a *ArticleService) SearchByArticleId(article *model.Article) error {
 	articleDao := new(dao.ArticleDao)
-	if err := articleDao.GetArticleById(article); err != nil {
+	if err := articleDao.GetArticle(article); err != nil {
 		return err
 	}
 	return nil
