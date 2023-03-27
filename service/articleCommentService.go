@@ -19,7 +19,14 @@ func (ac *ArticleCommentService) CreateComment(articleComment *model.ArticleComm
 	}
 	return nil
 }
-
+func (ac *ArticleCommentService) GetArticleCommentLimit(articleComment *model.ArticleComment, offset int) (*[]model.ArticleComment, error) {
+	articleCommentDao := new(dao.ArticleCommentDao)
+	articleCommentList, err := articleCommentDao.GetCommentListOffLim(articleComment, offset)
+	if err != nil {
+		return articleCommentList, err
+	}
+	return articleCommentList, nil
+}
 func (ac *ArticleCommentService) GetArticleComment(articleComment *model.ArticleComment) (*[]model.ArticleComment, error) {
 	articleCommentDao := new(dao.ArticleCommentDao)
 	articleCommentList, err := articleCommentDao.GetCommentList(articleComment)

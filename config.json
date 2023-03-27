@@ -1,6 +1,6 @@
 {
   "app": {
-    "appName": "SimpleRouter"
+    "appName": "GinServer"
   },
   "server": {
     "address": "127.0.0.1",

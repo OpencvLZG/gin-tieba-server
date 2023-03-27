@@ -8,3 +8,13 @@
 **/
 
 package model
+
+import "time"
+
+type BelongFollower struct {
+	Id          int64     `json:"id" xorm:"autoincr pk"`
+	BelongId    int64     `json:"belong_id" xorm:"not null"`
+	Follower    int64     `json:"follower" xorm:"not null"`
+	CreatedTime time.Time `json:"created_time" xorm:"created"`
+	UpdateTime  time.Time `json:"update_time" xorm:"updated"`
+}

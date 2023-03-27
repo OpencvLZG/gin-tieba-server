@@ -86,13 +86,22 @@ func (u *UserService) FindBySecret(secret string) (*model.User, error) {
 
 	user := new(model.User)
 	user.Username = secret
-	if err := userDao.QueryBySecret(user); err != nil {
+	res, err := userDao.QueryBySecret(user)
+	if err != nil {
 		return nil, err
 	}
-	if user.Id == 0 {
+	if res != true {
 		return nil, errors.New("用户不存在")
 	}
-
 	return user, nil
+
+}
+
+func (u *UserService) GetUserByUid(uid int64) (*model.User, error) {
+	userDao := new(dao.UserDao)
+	user := new(model.User)
+	user.Id = uid
+	err := userDao.GetUserByUid(user)
+	return user, err
 
 }

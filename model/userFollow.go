@@ -8,3 +8,12 @@
 **/
 
 package model
+
+import "time"
+
+type UserFollow struct {
+	Id          int       `json:"id" xorm:"autoincr pk not null"`
+	UserId      int       `json:"user_id" xorm:"not null"`
+	FollowId    int       `json:"follow_id" xorm:"not null"`
+	CreatedTime time.Time `json:"created_time" xorm:"created"`
+}

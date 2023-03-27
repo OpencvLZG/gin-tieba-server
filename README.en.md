@@ -4,17 +4,67 @@
 使用golang-gin框架完成的服务后端
 
 #### Software Architecture
-Software architecture description
+ginTiebaServer is base on golang-gin backend develop,a TiebaServer.
 
 #### Installation
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1. Install Golang [Google]([Download and install - The Go Programming Language (google.cn)](https://golang.google.cn/doc/install) "go language")
+
+2. Turn On Terminal Cd This Project(You will find the go.mod) 
+
+3. install depend
+
+   ```go
+   go mod tidy
+   ```
+
+4. Create database 
+
+   ```mysql
+   create database tieba;
+   ```
+
+5. Modify the config.json
+
+   ```json
+   {
+     "app": {
+       "appName": "GinServer"
+     },
+     "server": {
+       "address": "127.0.0.1",	
+       "port": "80"
+     },
+     "mysql": {
+       "user": "root",
+       "password": "123456",
+       "ip": "127.0.0.1",
+       "port": "3306",
+       "databaseName": "tieba",
+       "Charset": "utf8"
+     }
+   }
+   ```
+
+   
+
+6. Remove annotation from "util/xorm.go"
+
+   ```go
+   //engine.Sync2(new(model.User))
+   //engine.Sync2(new(model.UserFollow))
+   ////engine.Sync2(new(model.Article))
+   ////engine.Sync2(new(model.ArticleComment))
+   //engine.Sync2(new(model.Belong))
+   //engine.Sync2(new(model.BelongFollower))
+   // This Code will be sync database
+   ```
+
+7. Test the ServerAddress:ServerPort
 
 #### Instructions
 
-1.  xxxx
+1.  x
 2.  xxxx
 3.  xxxx
 
@@ -28,9 +78,4 @@ Software architecture description
 
 #### Gitee Feature
 
-1.  You can use Readme\_XXX.md to support different languages, such as Readme\_en.md, Readme\_zh.md
-2.  Gitee blog [blog.gitee.com](https://blog.gitee.com)
-3.  Explore open source project [https://gitee.com/explore](https://gitee.com/explore)
-4.  The most valuable open source project [GVP](https://gitee.com/gvp)
-5.  The manual of Gitee [https://gitee.com/help](https://gitee.com/help)
-6.  The most popular members  [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+1.  

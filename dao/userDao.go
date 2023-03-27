@@ -1,7 +1,6 @@
 package dao
 
 import (
-	"errors"
 	"ginFlutterBolg/model"
 	"ginFlutterBolg/util"
 )
@@ -14,11 +13,7 @@ type (
 func (u *UserDao) Insert(user *model.User) error {
 	orm := util.Orm
 	_, err := orm.InsertOne(user)
-
-	if err != nil {
-		return errors.New("数据库注册失败")
-	}
-	return nil
+	return err
 }
 
 func (u *UserDao) Login(user *model.User) (bool, error) {
@@ -27,9 +22,14 @@ func (u *UserDao) Login(user *model.User) (bool, error) {
 	res, err := orm.Get(user)
 	return res, err
 }
-
-func (u *UserDao) QueryBySecret(user *model.User) error {
+func (u *UserDao) GetUserByUid(user *model.User) error {
 	orm := util.Orm
-	_, err := orm.Where("username = ?", user.Username).Get(user)
+	_, err := orm.Get(user)
 	return err
+}
+
+func (u *UserDao) QueryBySecret(user *model.User) (bool, error) {
+	orm := util.Orm
+	res, err := orm.Where("username = ?", user.Username).Get(user)
+	return res, err
 }

@@ -44,8 +44,8 @@ func (a *ArticleController) CreateArticle(c *gin.Context) {
 	article.ArticleContext = articleRequest.ArticleContext
 	article.Belong = articleRequest.Belong
 	article.ImgUrl = articleRequest.ImgUrl
-	print(article.Title)
-	println(articleRequest.Title)
+	//print(article.Title)
+	//println(articleRequest.Title)
 	articleService := new(service.ArticleService)
 	err = articleService.InsertArticle(article)
 	if err != nil {
@@ -63,7 +63,7 @@ func (a *ArticleController) SearchArticleById(c *gin.Context) {
 	}
 	articleService := new(service.ArticleService)
 	err := articleService.SearchByArticleId(article)
-	print(err)
+	//print(err)
 	if err != nil {
 		ResponseStatusOk(c, 410, "搜索失败", err.Error())
 		return

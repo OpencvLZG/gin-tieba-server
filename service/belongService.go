@@ -8,3 +8,25 @@
 **/
 
 package service
+
+import (
+	"ginFlutterBolg/dao"
+	"ginFlutterBolg/model"
+)
+
+type (
+	BelongService struct {
+	}
+)
+
+func (b *BelongService) CreatBelong(belong *model.Belong) error {
+	belongDao := new(dao.BelongDao)
+	err := belongDao.CreateBelong(belong)
+	return err
+}
+
+func (b *BelongService) DelBelong(belong *model.Belong) error {
+	belongDao := new(dao.BelongDao)
+	err := belongDao.DelBelong(belong)
+	return err
+}

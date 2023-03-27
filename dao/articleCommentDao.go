@@ -21,7 +21,16 @@ func (ac *ArticleCommentDao) InertComment(articleComment *model.ArticleComment) 
 func (ac *ArticleCommentDao) GetCommentList(articleComment *model.ArticleComment) (*[]model.ArticleComment, error) {
 	orm := util.Orm
 	articleCommentList := make([]model.ArticleComment, 0)
-	err := orm.Where(&model.ArticleComment{ArticleId: articleComment.ArticleId}).OrderBy("create_time").Find(&articleCommentList)
+	err := orm.Limit(10).Where("article_id = ?", articleComment.ArticleId).OrderBy("create_time").Find(&articleCommentList)
+	if err != nil {
+		return &articleCommentList, errors.New("获取评论失败,数据库搜索失败")
+	}
+	return &articleCommentList, nil
+}
+func (ac *ArticleCommentDao) GetCommentListOffLim(articleComment *model.ArticleComment, offset int) (*[]model.ArticleComment, error) {
+	orm := util.Orm
+	articleCommentList := make([]model.ArticleComment, 0)
+	err := orm.Limit(10, offset).Where("article_id = ?", articleComment.ArticleId).OrderBy("create_time").Find(&articleCommentList)
 	if err != nil {
 		return &articleCommentList, errors.New("获取评论失败,数据库搜索失败")
 	}

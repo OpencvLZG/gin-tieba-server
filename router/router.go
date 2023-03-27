@@ -14,6 +14,7 @@ func InitRouter(gin *gin.Engine) {
 	userController := &controller.UserController{}
 	articleController := &controller.ArticleController{}
 	articleCommentController := &controller.ArticleCommentController{}
+	belongController := &controller.BelongController{}
 
 	userGroup := gin.Group("/user")
 	userGroup.POST("/login", userController.UserLogin)
@@ -22,10 +23,18 @@ func InitRouter(gin *gin.Engine) {
 	viewGroup := gin.Group("/view")
 	viewGroup.GET("list", articleController.GetArticleList)
 	viewGroup.GET("search", articleController.SearchArticleById)
+	viewGroup.GET("commentList", articleCommentController.GetArticleCommentList)
+	viewGroup.GET("commentListLim", articleCommentController.GetArticleCommentListLimit)
+	viewGroup.GET("searchUsrByUid", userController.GetUserByUid)
 
 	articleGroup := gin.Group("/article")
 	articleGroup.Use(LoginMiddleWare)
 	articleGroup.POST("create_article", articleController.CreateArticle)
+
+	belongGroup := gin.Group("/belong")
+	belongGroup.Use(LoginMiddleWare)
+	belongGroup.POST("create_belong", belongController.CreateBelong)
+	belongGroup.POST("del_belong", belongController.DelBelong)
 
 	articleCommentGroup := gin.Group("/articleComment")
 	articleCommentGroup.Use(LoginMiddleWare)
