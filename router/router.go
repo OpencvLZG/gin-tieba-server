@@ -22,10 +22,10 @@ func InitRouter(gin *gin.Engine) {
 
 	viewGroup := gin.Group("/view")
 	viewGroup.GET("list", articleController.GetArticleList)
-	viewGroup.GET("search", articleController.SearchArticleById)
+	viewGroup.GET("searchArticle", articleController.SearchArticleById)
 	viewGroup.GET("commentList", articleCommentController.GetArticleCommentList)
 	viewGroup.GET("commentListLim", articleCommentController.GetArticleCommentListLimit)
-	viewGroup.GET("searchUsrByUid", userController.GetUserByUid)
+	viewGroup.GET("searchUserByUid", userController.GetUserByUid)
 
 	articleGroup := gin.Group("/article")
 	articleGroup.Use(LoginMiddleWare)

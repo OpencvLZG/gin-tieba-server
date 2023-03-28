@@ -38,6 +38,7 @@ func (a *ArticleController) CreateArticle(c *gin.Context) {
 		return
 	}
 	article.UserId = user.Id
+	article.UserName = user.Username
 	//println(user.Id)
 	//println(articleRequest.Title)
 	article.Title = articleRequest.Title

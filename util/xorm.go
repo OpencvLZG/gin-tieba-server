@@ -21,7 +21,7 @@ func GetOrmEngine() (*xorm.Engine, error) {
 	//engine.ShowSQL(true)
 	//engine.Sync2(new(model.User))
 	//engine.Sync2(new(model.UserFollow))
-	////engine.Sync2(new(model.Article))
+	//engine.Sync2(new(model.Article))
 	////engine.Sync2(new(model.ArticleComment))
 	//engine.Sync2(new(model.Belong))
 	//engine.Sync2(new(model.BelongFollower))
