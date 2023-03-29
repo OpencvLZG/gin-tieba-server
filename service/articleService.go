@@ -42,3 +42,12 @@ func (a *ArticleService) SearchByArticleId(article *model.Article) error {
 	}
 	return nil
 }
+
+func (a *ArticleService) SearchByArticleUid(uid int64) (*[]model.Article, error) {
+	articleDao := new(dao.ArticleDao)
+	articleList, err := articleDao.SearchArticleListByUid(uid)
+	if err != nil {
+
+	}
+	return articleList, err
+}

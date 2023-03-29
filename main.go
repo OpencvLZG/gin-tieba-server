@@ -14,6 +14,7 @@ func main() {
 		panic(err)
 	}
 	path := dir + "/config.json"
+	print(path)
 	config := util.ReadJson(path)
 	print(config)
 	////实例化数据库

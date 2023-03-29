@@ -71,3 +71,20 @@ func (a *ArticleController) SearchArticleById(c *gin.Context) {
 	}
 	ResponseStatusOk(c, 200, "搜索成功", article)
 }
+
+func (a *ArticleController) SearchArticleByUid(c *gin.Context) {
+	user := new(model.User)
+	if err := c.Bind(&user); err != nil {
+		ResponseStatusOk(c, 400, "数据绑定错误", err.Error())
+		return
+	}
+	articleService := new(service.ArticleService)
+	list, err := articleService.SearchByArticleUid(user.Id)
+	if err != nil {
+
+	}
+	ResponseStatusOk(c, 200, "ok", gin.H{
+		"list": list,
+	})
+
+}
