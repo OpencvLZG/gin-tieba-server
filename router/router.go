@@ -31,6 +31,8 @@ func InitRouter(gin *gin.Engine) {
 	followGroup := gin.Group("/follow")
 	followGroup.Use(LoginMiddleWare)
 	followGroup.POST("/followUser", userFollowController.FollowUser)
+	followGroup.POST("/unFollowUser", userFollowController.UnFollowUser)
+
 	articleGroup := gin.Group("/article")
 	articleGroup.Use(LoginMiddleWare)
 	articleGroup.POST("create_article", articleController.CreateArticle)

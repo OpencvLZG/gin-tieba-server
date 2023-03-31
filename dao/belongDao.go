@@ -32,3 +32,9 @@ func (b *BelongDao) DelBelong(belong *model.Belong) error {
 		Update(belong, &model.Belong{UserId: belong.UserId, BelongId: belong.BelongId})
 	return err
 }
+
+func (b *BelongDao) SearchBelongById(belong *model.Belong) (bool, error) {
+	orm := util.Orm
+	res, err := orm.Get(belong)
+	return res, err
+}
