@@ -21,6 +21,12 @@ type (
 
 func (uf *UserFollowService) FollowUser(userFollow *model.UserFollow) error {
 	userFollowDao := new(dao.UserFollowDao)
+	err := userFollowDao.FollowUser(userFollow)
+	return err
+}
+
+func (uf *UserFollowService) UnFollowUser(userFollow *model.UserFollow) error {
+	userFollowDao := new(dao.UserFollowDao)
 	err := userFollowDao.UnFollowUser(userFollow)
 	return err
 }

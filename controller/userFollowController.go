@@ -38,7 +38,30 @@ func (u *UserFollowController) FollowUser(c *gin.Context) {
 	userFollowService := new(service.UserFollowService)
 	err = userFollowService.FollowUser(userFollow)
 	if err != nil {
+		ResponseStatusOk(c, 400, "数据库插入失败", "")
 		return
 	}
 	ResponseStatusOk(c, 200, "关注成功", "")
+}
+
+func (u *UserFollowController) UnFollowUser(c *gin.Context) {
+	userController := new(UserController)
+	user, err := userController.GetUserInfo(c)
+	if err != nil {
+		ResponseStatusOk(c, 400, "数据获取错误", err.Error())
+		return
+	}
+	userFollow := new(model.UserFollow)
+	if err := c.Bind(&userFollow); err != nil {
+		ResponseStatusOk(c, 400, "数据同步错误", err.Error())
+		return
+	}
+	userFollow.UserId = user.Id
+	userFollowService := new(service.UserFollowService)
+	err = userFollowService.UnFollowUser(userFollow)
+	if err != nil {
+		ResponseStatusOk(c, 400, "取关失败", err.Error())
+		return
+	}
+	ResponseStatusOk(c, 200, "取关成功", "")
 }

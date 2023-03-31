@@ -15,7 +15,7 @@ func InitRouter(gin *gin.Engine) {
 	articleController := &controller.ArticleController{}
 	articleCommentController := &controller.ArticleCommentController{}
 	belongController := &controller.BelongController{}
-
+	userFollowController := &controller.UserFollowController{}
 	userGroup := gin.Group("/user")
 	userGroup.POST("/login", userController.UserLogin)
 	userGroup.POST("/register", userController.UserRegister)
@@ -28,6 +28,9 @@ func InitRouter(gin *gin.Engine) {
 	viewGroup.GET("commentListLim", articleCommentController.GetArticleCommentListLimit)
 	viewGroup.GET("searchUserByUid", userController.GetUserByUid)
 
+	followGroup := gin.Group("/follow")
+	followGroup.Use(LoginMiddleWare)
+	followGroup.POST("/followUser", userFollowController.FollowUser)
 	articleGroup := gin.Group("/article")
 	articleGroup.Use(LoginMiddleWare)
 	articleGroup.POST("create_article", articleController.CreateArticle)
