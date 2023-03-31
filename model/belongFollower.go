@@ -13,8 +13,8 @@ import "time"
 
 type BelongFollower struct {
 	Id          int64     `json:"id" xorm:"autoincr pk"`
-	BelongId    int64     `json:"belong_id" xorm:"not null unique(belong_id, user_id)"`
-	UserId      int64     `json:"user_id" xorm:"not null"`
+	BelongId    int64     `json:"belong_id" xorm:"not null unique(un_index)"`
+	UserId      int64     `json:"user_id" xorm:"not null unique(un_index)"`
 	CreatedTime time.Time `json:"created_time" xorm:"created"`
 	UpdateTime  time.Time `json:"update_time" xorm:"updated"`
 }

@@ -13,7 +13,7 @@ import "time"
 
 type UserFollow struct {
 	Id          int64     `json:"id" xorm:"autoincr pk not null"`
-	UserId      int64     `json:"user_id" xorm:"not null"`
-	FollowId    int64     `json:"follow_id" xorm:"not null unique(user_id, follow_id)"`
+	UserId      int64     `json:"user_id" xorm:"not null unique(un_index)"`
+	FollowId    int64     `json:"follow_id" xorm:"not null unique(un_index)"`
 	CreatedTime time.Time `json:"created_time" xorm:"created"`
 }
