@@ -17,6 +17,7 @@ func InitRouter(gin *gin.Engine) {
 	belongController := &controller.BelongController{}
 	belongFollowController := &controller.BelongFollowController{}
 	userFollowController := &controller.UserFollowController{}
+	chatController := &controller.ChatController{}
 	userGroup := gin.Group("/user")
 	userGroup.POST("/login", userController.UserLogin)
 	userGroup.POST("/register", userController.UserRegister)
@@ -47,6 +48,10 @@ func InitRouter(gin *gin.Engine) {
 	articleCommentGroup := gin.Group("/articleComment")
 	articleCommentGroup.Use(LoginMiddleWare)
 	articleCommentGroup.POST("create_comment", articleCommentController.CreateComment)
+
+	wsGroup := gin.Group("/ws")
+	wsGroup.Use(LoginMiddleWare)
+	wsGroup.GET("/chat", chatController.WsHandle)
 }
 
 // Cors 处理跨域请求,支持options访问

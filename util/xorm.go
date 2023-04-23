@@ -18,7 +18,7 @@ func GetOrmEngine() (*xorm.Engine, error) {
 	if err != nil {
 		return nil, err
 	}
-	engine.ShowSQL(true)
+	//engine.ShowSQL(true)
 	//engine.Sync2(new(model.User))
 	//engine.Sync2(new(model.UserFollow))
 	//engine.Sync2(new(model.Article))
