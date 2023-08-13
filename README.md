@@ -1,37 +1,81 @@
 # ginTiebaServer
 
-#### 介绍
+#### Description
 使用golang-gin框架完成的服务后端
 
-#### 软件架构
-软件架构说明
+#### Software Architecture
+ginTiebaServer is base on golang-gin backend develop,a TiebaServer.
+
+#### Installation
+
+1. Install Golang [Google]([Download and install - The Go Programming Language (google.cn)](https://golang.google.cn/doc/install) "go language")
+
+2. Turn On Terminal Cd This Project(You will find the go.mod)
+
+3. install depend
+
+   ```go
+   go mod tidy
+   ```
+
+4. Create database
+
+   ```mysql
+   create database tieba;
+   ```
+
+5. Modify the config.json
+
+   ```json
+   {
+     "app": {
+       "appName": "GinServer"
+     },
+     "server": {
+       "address": "127.0.0.1",	
+       "port": "80"
+     },
+     "mysql": {
+       "user": "root",
+       "password": "123456",
+       "ip": "127.0.0.1",
+       "port": "3306",
+       "databaseName": "tieba",
+       "Charset": "utf8"
+     }
+   }
+   ```
 
 
-#### 安装教程
 
-1.  xxxx
+6. Remove annotation from "util/xorm.go"
+
+   ```go
+   //engine.Sync2(new(model.User))
+   //engine.Sync2(new(model.UserFollow))
+   ////engine.Sync2(new(model.Article))
+   ////engine.Sync2(new(model.ArticleComment))
+   //engine.Sync2(new(model.Belong))
+   //engine.Sync2(new(model.BelongFollower))
+   // This Code will be sync database
+   ```
+
+7. Test the ServerAddress:ServerPort
+
+#### Instructions
+
+1.  x
 2.  xxxx
 3.  xxxx
 
-#### 使用说明
+#### Contribution
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 参与贡献
-
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+1.  Fork the repository
+2.  Create Feat_xxx branch
+3.  Commit your code
+4.  Create Pull Request
 
 
-#### 特技
+#### Gitee Feature
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+1.  
