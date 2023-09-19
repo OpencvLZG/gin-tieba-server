@@ -36,7 +36,7 @@ func (b *BelongFollowController) BelongFollow(c *gin.Context) {
 		return
 	}
 	if res != true {
-		ResponseStatusOk(c, 400, "贴吧不存在", "")
+		ResponseStatusOk(c, 400, "贴吧不存在", nil)
 		return
 	}
 	userController := new(UserController)
@@ -54,6 +54,6 @@ func (b *BelongFollowController) BelongFollow(c *gin.Context) {
 		ResponseStatusOk(c, 400, "关注失败", err.Error())
 		return
 	}
-	ResponseStatusOk(c, 200, "关注成功", "")
+	ResponseStatusOk(c, 200, "关注成功", nil)
 
 }

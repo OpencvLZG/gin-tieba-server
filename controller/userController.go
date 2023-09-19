@@ -14,7 +14,7 @@ type (
 	}
 )
 
-func (h *UserController) UserLogin(c *gin.Context) {
+func (u *UserController) UserLoginByUserName(c *gin.Context) {
 	loginUser := new(service.LoginUser)
 	if err := c.Bind(&loginUser); err != nil {
 		ResponseStatusOk(c, 400, "数据同步错误", err.Error())
@@ -22,32 +22,50 @@ func (h *UserController) UserLogin(c *gin.Context) {
 	}
 
 	userService := new(service.UserService)
-	res, err := userService.Login(loginUser)
+	res, err := userService.LoginByUsername(loginUser)
 	if err != nil {
-		ResponseStatusOk(c, 400, "登录失败", res)
+		ResponseStatusOk(c, 400, "登录失败", err.Error())
 		return
 	}
 	ResponseStatusOk(c, 200, "登录成功", res)
 }
-func (h *UserController) UserRegister(c *gin.Context) {
+func (u *UserController) UserLoginByAccount(c *gin.Context) {
+	loginUser := new(service.LoginUser)
+	if err := c.Bind(&loginUser); err != nil {
+		ResponseStatusOk(c, 400, "数据同步错误", err.Error())
+		return
+	}
+
+	userService := new(service.UserService)
+	res, err := userService.LoginByAccount(loginUser)
+	if err != nil {
+		ResponseStatusOk(c, 400, "登录失败", err.Error())
+		return
+	}
+	ResponseStatusOk(c, 200, "登录成功", res)
+}
+func (u *UserController) UserRegister(c *gin.Context) {
 	registerUser := new(service.RegisterUser)
 	if err := c.Bind(&registerUser); err != nil {
 		ResponseStatusOk(c, 400, "数据同步错误", err.Error())
 		return
 	}
 	userService := new(service.UserService)
-	err := userService.Register(registerUser)
+	user, err := userService.Register(registerUser)
 	if err != nil {
 		ResponseStatusOk(c, 400, "注册过程出错", err.Error())
 		return
 	}
-	ResponseStatusOk(c, 400, "注册成功", "")
+	ResponseStatusOk(c, 200, "注册成功", user)
 
 }
 
 func (u *UserController) GetUserInfo(c *gin.Context) (*model.User, error) {
 	//获取用户信息
-	val, _ := c.Get("userSecret")
+	val, exists := c.Get("userSecret")
+	if !exists {
+		return nil, errors.New("用户未登录")
+	}
 	secret := val.(string)
 	if secret == "" {
 		return nil, errors.New("用户登陆失败")
@@ -80,4 +98,23 @@ func (u *UserController) GetUserByUid(c *gin.Context) {
 		"avatar":     user.Avatar,
 	}
 	ResponseStatusOk(c, 200, "查找成功", userInfo)
+}
+
+func (u *UserController) ReName(c *gin.Context) {
+	newName := c.Query("new_name")
+	user, err := u.GetUserInfo(c)
+	if err != nil {
+		ResponseStatusFail(c, 400, "请重新登录", err.Error())
+		return
+	}
+
+	user.Username = newName
+	userService := new(service.UserService)
+	err = userService.ReName(user)
+	if err != nil {
+		ResponseStatusFail(c, 400, "修改失败", err.Error())
+		return
+	}
+	ResponseStatusOk(c, 200, "修改成功", err)
+
 }

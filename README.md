@@ -1,6 +1,21 @@
-# ginTiebaServer
+
+<div align=center></br></br></br>
+
+<center> <img src="https://thirdqq.qlogo.cn/g?b=sdk&k=iaNcdgTAPWOS0JJseiafW1Dw&kti=ZIsqGgAAAAI&s=40&t=1638804590" style="zoom:300%;" /></center>
+
+#  <center>ginTiebaServer</center>
+
+###### <center>Introduce</center>
+
+###### 							
+![golang](https://img.shields.io/badge/golang-blue?logo=go) ![gin](https://img.shields.io/badge/gin-blue?logo=backend)  ![open sourse (shields.io)](https://img.shields.io/badge/open%20sourse-darkgreen?logo=opensourceinitiative)   ![github (shields.io)](https://img.shields.io/badge/github-grey?logo=github) ![gitee (shields.io)](https://img.shields.io/badge/gitee-orange?logo=gitee) ![git (shields.io)](https://img.shields.io/badge/git-lightblue?logo=git) ![Mit: license (shields.io)](https://img.shields.io/badge/Mit-license-blue?logo=bookstack) ![img](https://komarev.com/ghpvc/?username=cilang-ginTiebaServer&&style=flat-square)
+
+<center>a tieba backend server</center>
+
+</div>
 
 #### Description
+based on golang implement
 使用golang-gin框架完成的服务后端
 
 #### Software Architecture
@@ -78,4 +93,18 @@ ginTiebaServer is base on golang-gin backend develop,a TiebaServer.
 
 #### Gitee Feature
 
-1.  
+1. 
+
+#### Api Document
+
+
+[Postman Document Online](https://documenter.getpostman.com/view/20660781/2s9YC5wrgi)
+
+
+### Donate
+
+Thank ur supprt
+
+| <center>微信</center>                            | <center>支付宝</center>                       |
+| ------------------------------------------------ | --------------------------------------------- |
+| <center>![image](./gitImage/weixin.png)</center> | <center>![image](./gitImage/zfb.jpg)</center> |

@@ -5,18 +5,24 @@ import (
 	"ginFlutterBolg/util"
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
+	"log"
 	"os"
 )
 
 func main() {
+	defer func() {
+		log.Println("exit server program")
+	}()
+
+	util.LogInit()
 	dir, err := os.Getwd()
 	if err != nil {
 		panic(err)
 	}
 	path := dir + "/config.json"
-	print(path)
+	log.Println("loading Config,config path" + path)
 	config := util.ReadJson(path)
-	print(config)
+	log.Printf("server config,%v\n", config)
 	////实例化数据库
 	_, err = util.GetOrmEngine()
 	if err != nil {
@@ -26,5 +32,8 @@ func main() {
 	r := gin.Default()
 	//注册路由
 	router.InitRouter(r)
-	r.Run(config.Server.Address + ":" + config.Server.Port)
+	err = r.Run(config.Server.Address + ":" + config.Server.Port)
+	if err != nil {
+		log.Fatal(err)
+	}
 }

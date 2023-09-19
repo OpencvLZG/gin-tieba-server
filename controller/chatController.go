@@ -47,15 +47,24 @@ func (c *ChatController) ChatWithUid(wsConn *websocket.Conn) {
 		}
 		err = json.Unmarshal(msg, pointMsg)
 		if err != nil {
-			wsConn.WriteMessage(websocket.TextMessage, []byte("Request Data Format Is Wrong"))
+			err := wsConn.WriteMessage(websocket.TextMessage, []byte("Request Data Format Is Wrong"))
+			if err != nil {
+				return
+			}
 			continue
 		}
 		reWsConn, ok := Hub[pointMsg.Receptor]
 		if !ok {
-			wsConn.WriteMessage(websocket.TextMessage, []byte("This User Is Not Online"))
+			err := wsConn.WriteMessage(websocket.TextMessage, []byte("This User Is Not Online"))
+			if err != nil {
+				return
+			}
 			continue
 		}
-		reWsConn.WriteMessage(websocket.TextMessage, msg)
+		err = reWsConn.WriteMessage(websocket.TextMessage, msg)
+		if err != nil {
+			return
+		}
 	}
 
 }
@@ -69,7 +78,7 @@ func (c *ChatController) WsHandle(gc *gin.Context) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	Hub[user.UserId] = wsConn
+	Hub[user.Id] = wsConn
 
 	go c.ChatWithUid(wsConn)
 }

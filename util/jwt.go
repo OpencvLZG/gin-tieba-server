@@ -2,6 +2,7 @@ package util
 
 import (
 	"github.com/dgrijalva/jwt-go"
+	"time"
 )
 
 type (
@@ -25,7 +26,10 @@ func (a *AccessToken) GenerateToken() error {
 			// 过期时间
 			ExpiresAt: a.Expire,
 			// 指定token发行人
-			Issuer: "ganganlee",
+			Issuer: "www.cilang.buzz",
+			// 最早使用
+			//NotBefore:
+			IssuedAt: time.Now().Unix(),
 		},
 	}
 

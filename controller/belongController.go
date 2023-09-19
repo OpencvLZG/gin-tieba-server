@@ -59,8 +59,8 @@ func (b *BelongController) DelBelong(c *gin.Context) {
 	belong.UserId = user.Id
 	err = belongService.DelBelong(belong)
 	if err != nil {
-		ResponseStatusOk(c, 400, "文章删除错误", "")
+		ResponseStatusOk(c, 400, "文章删除错误", nil)
 		return
 	}
-	ResponseStatusOk(c, 200, "删除成功", "")
+	ResponseStatusOk(c, 200, "删除成功", nil)
 }

@@ -32,7 +32,7 @@ func (ac *ArticleCommentController) CreateComment(c *gin.Context) {
 		ResponseStatusOk(c, 400, "评论失败", err.Error())
 		return
 	}
-	ResponseStatusOk(c, 200, "评论成功", "")
+	ResponseStatusOk(c, 200, "评论成功", nil)
 }
 
 func (ac *ArticleCommentController) GetArticleCommentList(c *gin.Context) {

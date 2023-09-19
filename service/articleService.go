@@ -21,33 +21,28 @@ type (
 func (a *ArticleService) ArticleList() (*[]model.Article, error) {
 	articleDao := new(dao.ArticleDao)
 	articleList, err := articleDao.GetArticleLimit()
-	if err != nil {
-
-	}
 	return articleList, err
 }
+func (a *ArticleService) GetArticleOffset(page int) (*[]model.Article, error) {
+	articleDao := new(dao.ArticleDao)
+	articleList, err := articleDao.GetArticleOffset(page)
+	return articleList, err
 
+}
 func (a *ArticleService) InsertArticle(article *model.Article) error {
 	articleDao := new(dao.ArticleDao)
-	if err := articleDao.InsertArticle(article); err != nil {
-
-	}
-	return nil
+	err := articleDao.InsertArticle(article)
+	return err
 }
 
 func (a *ArticleService) SearchByArticleId(article *model.Article) error {
 	articleDao := new(dao.ArticleDao)
-	if err := articleDao.GetArticle(article); err != nil {
-		return err
-	}
-	return nil
+	err := articleDao.GetArticle(article)
+	return err
 }
 
 func (a *ArticleService) SearchByArticleUid(uid int64) (*[]model.Article, error) {
 	articleDao := new(dao.ArticleDao)
 	articleList, err := articleDao.SearchArticleListByUid(uid)
-	if err != nil {
-
-	}
 	return articleList, err
 }

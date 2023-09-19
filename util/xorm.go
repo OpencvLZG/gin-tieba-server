@@ -1,6 +1,7 @@
 package util
 
 import (
+	"ginFlutterBolg/model"
 	"xorm.io/xorm"
 )
 
@@ -19,7 +20,7 @@ func GetOrmEngine() (*xorm.Engine, error) {
 		return nil, err
 	}
 	//engine.ShowSQL(true)
-	//engine.Sync2(new(model.User))
+	engine.Sync2(new(model.User))
 	//engine.Sync2(new(model.UserFollow))
 	//engine.Sync2(new(model.Article))
 	//engine.Sync2(new(model.ArticleComment))

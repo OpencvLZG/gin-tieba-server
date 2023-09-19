@@ -19,20 +19,20 @@ type (
 	}
 )
 
-func (uf *UserFollowDao) FollowUser(userFollow *model.UserFollow) error {
+func (u *UserFollowDao) FollowUser(userFollow *model.UserFollow) error {
 	orm := util.Orm
 	_, err := orm.InsertOne(userFollow)
 	return err
 }
 
-func (uf *UserFollowDao) GetFollowedUid(userFollow *model.UserFollow) error {
+func (u *UserFollowDao) GetFollowedUid(userFollow *model.UserFollow) error {
 	orm := util.Orm
 	_, err := orm.Get(userFollow)
 	return err
 
 }
 
-func (uf *UserFollowDao) UnFollowUser(userFollow *model.UserFollow) error {
+func (u *UserFollowDao) UnFollowUser(userFollow *model.UserFollow) error {
 	orm := util.Orm
 	_, err := orm.Delete(userFollow)
 	return err

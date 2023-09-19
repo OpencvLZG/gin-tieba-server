@@ -24,7 +24,7 @@ func GenerateKey() string {
 	return hex.EncodeToString(hasher.Sum(nil))
 }
 
-func GenerateUID() int64 {
+func GenerateUID() string {
 	// 确定字符集和长度
 	rand.Seed(time.Now().UnixNano())
 	const uidLen = 8
@@ -35,8 +35,8 @@ func GenerateUID() int64 {
 	for i := 0; i < uidLen; i++ {
 		uidBuilder += string(charset[rand.Intn(len(charset))])
 	}
-	uid, _ := strconv.ParseInt(uidBuilder, 10, 64)
-	return uid
+	//uid, _ := strconv.ParseInt(uidBuilder, 10, 64)
+	return uidBuilder
 }
 
 func GenerateID() int64 {

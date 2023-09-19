@@ -4,6 +4,7 @@ import (
 	"ginFlutterBolg/model"
 	"ginFlutterBolg/service"
 	"github.com/gin-gonic/gin"
+	"strconv"
 )
 import . "ginFlutterBolg/util"
 
@@ -16,7 +17,25 @@ func (a *ArticleController) GetArticleList(c *gin.Context) {
 	articleService := new(service.ArticleService)
 	list, err := articleService.ArticleList()
 	if err != nil {
+		ResponseStatusFail(c, 400, "文章获取失败", err.Error())
+	}
+	ResponseStatusOk(c, 200, "ok", gin.H{
+		"list": list,
+	})
 
+}
+func (a *ArticleController) GetArticleListOffset(c *gin.Context) {
+	page := c.Query("page")
+	intPage, err := strconv.Atoi(page)
+	if err != nil {
+		ResponseStatusOk(c, 400, "参数查询错误", err.Error())
+		return
+	}
+	articleService := new(service.ArticleService)
+	list, err := articleService.GetArticleOffset(intPage)
+	if err != nil {
+		ResponseStatusFail(c, 400, "文章获取失败", err.Error())
+		return
 	}
 	ResponseStatusOk(c, 200, "ok", gin.H{
 		"list": list,
@@ -39,21 +58,17 @@ func (a *ArticleController) CreateArticle(c *gin.Context) {
 	}
 	article.UserId = user.Id
 	article.UserName = user.Username
-	//println(user.Id)
-	//println(articleRequest.Title)
 	article.Title = articleRequest.Title
 	article.ArticleContext = articleRequest.ArticleContext
 	article.Belong = articleRequest.Belong
 	article.ImgUrl = articleRequest.ImgUrl
-	//print(article.Title)
-	//println(articleRequest.Title)
 	articleService := new(service.ArticleService)
 	err = articleService.InsertArticle(article)
 	if err != nil {
 		ResponseStatusOk(c, 400, "创建失败，不允许空标题和空内容", err.Error())
 		return
 	}
-	ResponseStatusOk(c, 200, "创建成功", "")
+	ResponseStatusOk(c, 200, "创建成功", nil)
 }
 
 func (a *ArticleController) SearchArticleById(c *gin.Context) {

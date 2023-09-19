@@ -63,5 +63,5 @@ func (u *UserFollowController) UnFollowUser(c *gin.Context) {
 		ResponseStatusOk(c, 400, "取关失败", err.Error())
 		return
 	}
-	ResponseStatusOk(c, 200, "取关成功", "")
+	ResponseStatusOk(c, 200, "取关成功", nil)
 }

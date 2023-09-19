@@ -4,7 +4,7 @@
 *.dll
 *.so
 *.dylib
-
+*.log
 # Test binary, built with `go test -c`
 *.test
 
@@ -13,4 +13,9 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
-./idea
+
+idea/
+cert/
+# Only upload log/README.md not upload log directory file
+log/*
+!log/README.md
