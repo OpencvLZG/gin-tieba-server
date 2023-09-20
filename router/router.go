@@ -65,6 +65,7 @@ func InitRouter(gin *gin.Engine) {
 	manageGroup := gin.Group("/manage")
 	manageGroup.Use(AdminValidMiddle)
 	manageGroup.POST("/generateToken", adminController.GenerateTemporaryTokens)
+
 	userManage := manageGroup.Group("/user")
 	userManage.GET("/getUserList", userManageController.GetUserList)
 	userManage.POST("/blockedUser", userManageController.BlockedUser)
