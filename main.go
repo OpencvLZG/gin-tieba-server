@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"ginFlutterBolg/router"
 	"ginFlutterBolg/util"
 	"github.com/gin-gonic/gin"
@@ -10,10 +11,14 @@ import (
 )
 
 func main() {
+
 	defer func() {
 		log.Println("exit server program")
 	}()
-
+	serverType := flag.String("serverType", "http", "server type,example: http,https,All")
+	cert := flag.String("cert", "./cert/example/server.cert", "the server cert")
+	key := flag.String("key", "./cert/example/server.key", "the server key")
+	flag.Parse()
 	util.LogInit()
 	dir, err := os.Getwd()
 	if err != nil {
@@ -32,9 +37,16 @@ func main() {
 	r := gin.Default()
 	//注册路由
 	router.InitRouter(r)
-	err = r.Run(config.Server.Address + ":" + config.Server.Port)
-	if err != nil {
-		log.Fatal(err)
+	if *serverType == "https" {
+		err = r.RunTLS(config.Server.Address+":"+config.Server.Port, *cert, *key)
+		if err != nil {
+			log.Fatal(err)
+		}
+	} else {
+		err = r.Run(config.Server.Address + ":" + config.Server.Port)
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
 
 }

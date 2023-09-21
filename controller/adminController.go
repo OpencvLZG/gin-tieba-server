@@ -45,3 +45,7 @@ func (a *AdminController) GenerateTemporaryTokens(c *gin.Context) {
 	ResponseStatusOk(c, 200, "生成成功", accessToken.Token)
 
 }
+
+func (a *AdminController) GetLogTotal(c *gin.Context) {
+
+}
